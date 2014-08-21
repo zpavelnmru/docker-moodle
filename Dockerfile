@@ -1,41 +1,46 @@
+# Dockerfile for moodle instance. more dockerish version of https://github.com/sergiogomez/docker-moodle
 FROM ubuntu:14.04
-MAINTAINER Sergio Gómez <sergio@quaip.com>
+MAINTAINER Jon Auer <jda@coldshore.com>
+
+VOLUME ["/var/moodledata"]
+EXPOSE 80
+COPY moodle-config.php /var/www/html/config.php
 
 # Keep upstart from complaining
-RUN dpkg-divert --local --rename --add /sbin/initctl
-RUN ln -sf /bin/true /sbin/initctl
+# RUN dpkg-divert --local --rename --add /sbin/initctl
+# RUN ln -sf /bin/true /sbin/initctl
 
-# Let the conatiner know that there is no tty
+# Let the container know that there is no tty
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update
-RUN apt-get -y upgrade
- 
-# Basic Requirements
-RUN apt-get -y install mysql-server mysql-client pwgen python-setuptools curl git unzip
+# Database info
+ENV MYSQL_HOST 127.0.0.1
+ENV MYSQL_USER moodle
+ENV MYSQL_PASSWORD moodle
+ENV MYSQL_DB moodle
 
-# Moodle Requirements
-RUN apt-get -y install apache2 php5 php5-gd libapache2-mod-php5 postfix wget supervisor php5-pgsql vim curl libcurl3 libcurl3-dev php5-curl php5-xmlrpc php5-intl php5-mysql
-
-# SSH
-RUN apt-get -y install openssh-server
-RUN mkdir -p /var/run/sshd
-
-# mysql config
-RUN sed -i -e"s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
-
-RUN easy_install supervisor
-ADD ./start.sh /start.sh
+# ADD http://downloads.sourceforge.net/project/moodle/Moodle/stable27/moodle-latest-27.tgz /tmp/moodle-latest-27.tgz
 ADD ./foreground.sh /etc/apache2/foreground.sh
-ADD ./supervisord.conf /etc/supervisord.conf
 
-ADD http://downloads.sourceforge.net/project/moodle/Moodle/stable27/moodle-latest-27.tgz /var/www/moodle-latest-27.tgz
-RUN cd /var/www; tar zxvf moodle-latest-27.tgz; mv /var/www/moodle /var/www/html
-RUN chown -R www-data:www-data /var/www/html/moodle
-RUN mkdir /var/moodledata
-RUN chown -R www-data:www-data /var/moodledata; chmod 777 /var/moodledata
-RUN chmod 755 /start.sh /etc/apache2/foreground.sh
+RUN apt-get update && \
+	apt-get -y upgrade && \
+	apt-get -y install mysql-client pwgen python-setuptools curl git unzip apache2 php5 \
+		php5-gd libapache2-mod-php5 postfix wget supervisor php5-pgsql curl libcurl3 \
+		libcurl3-dev php5-curl php5-xmlrpc php5-intl php5-mysql git-core && \
+	cd /tmp && \
+	git clone -b MOODLE_27_STABLE git://git.moodle.org/moodle.git && \
+	mv /tmp/moodle/* /var/www/html/ && \
+	rm /var/www/html/index.html && \
+	chown -R www-data:www-data /var/www/html && \
+	chmod +x /etc/apache2/foreground.sh
 
-EXPOSE 22 80
-CMD ["/bin/bash", "/start.sh"]
+CMD ["/etc/apache2/foreground.sh"]
+
+#RUN easy_install supervisor
+#ADD ./start.sh /start.sh
+#
+#ADD ./supervisord.conf /etc/supervisord.conf
+# RUN chmod 755 /start.sh /etc/apache2/foreground.sh
+# EXPOSE 22 80
+# CMD ["/bin/bash", "/start.sh"]
 
