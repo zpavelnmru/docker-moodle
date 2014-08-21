@@ -14,10 +14,11 @@ COPY moodle-config.php /var/www/html/config.php
 ENV DEBIAN_FRONTEND noninteractive
 
 # Database info
-ENV MYSQL_HOST 127.0.0.1
-ENV MYSQL_USER moodle
-ENV MYSQL_PASSWORD moodle
-ENV MYSQL_DB moodle
+#ENV MYSQL_HOST 127.0.0.1
+#ENV MYSQL_USER moodle
+#ENV MYSQL_PASSWORD moodle
+#ENV MYSQL_DB moodle
+ENV MOODLE_URL http://192.168.59.103
 
 # ADD http://downloads.sourceforge.net/project/moodle/Moodle/stable27/moodle-latest-27.tgz /tmp/moodle-latest-27.tgz
 ADD ./foreground.sh /etc/apache2/foreground.sh

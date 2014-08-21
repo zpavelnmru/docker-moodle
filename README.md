@@ -1,12 +1,12 @@
 docker-moodle
 =============
 
-A Dockerfile that installs the latest Moodle, Apache, PHP, MySQL and SSH
+A Dockerfile that installs and runs the latest Moodle stable.
 
 ## Installation
 
 ```
-git clone https://github.com/sergiogomez/docker-moodle.git
+git clone https://github.com/jda/docker-moodle
 cd docker-moodle
 docker build -t moodle .
 ```
@@ -16,13 +16,23 @@ docker build -t moodle .
 To spawn a new instance of Moodle:
 
 ```
-docker run --name moodle1 -e VIRTUAL_HOST=moodle.domain.com -d -t -p 80 -p 22 moodle
+docker run -d -p 3306:3306 -e MYSQL_DATABASE=moodle -e MYSQL_USER=moodle -e MYSQL_PASSWORD=moodle centurylink/mysql
+docker run -d -P --name moodle --link DB:DB -e MOODLE_URL=http://192.168.59.103:8080 -p 8080:80 jauer/moodle
 ```
 
 You can visit the following URL in a browser to get started:
 
 ```
-http://moodle.domain.com/moodle
+http://192.168.59.103:8080 
 ```
 
-Thanks to [eugeneware](https://github.com/eugeneware) and [ricardoamaro](https://github.com/ricardoamaro) for their Dockerfiles.
+## Caveats
+The following aren't handled, considered, or need work: 
+* moodle cronjob (should be called from cron container)
+* log handling (stdout?)
+* email (does it even send?)
+
+## Credits
+
+This is a reductionist take on [sergiogomez](https://github.com/sergiogomez/)'s docker-moodle Dockerfile.
+
