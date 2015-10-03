@@ -6,9 +6,6 @@ VOLUME ["/var/moodledata"]
 EXPOSE 80 443
 COPY moodle-config.php /var/www/html/config.php
 
-# Enable SSL, moodle requires it
-RUN a2enmod ssl && a2ensite default-ssl # if using proxy, don't need actually secure connection
-
 # Keep upstart from complaining
 # RUN dpkg-divert --local --rename --add /sbin/initctl
 # RUN ln -sf /bin/true /sbin/initctl
@@ -37,6 +34,9 @@ RUN apt-get update && \
 	rm /var/www/html/index.html && \
 	chown -R www-data:www-data /var/www/html && \
 	chmod +x /etc/apache2/foreground.sh
+
+# Enable SSL, moodle requires it
+RUN a2enmod ssl && a2ensite default-ssl # if using proxy, don't need actually secure connection
 
 CMD ["/etc/apache2/foreground.sh"]
 
