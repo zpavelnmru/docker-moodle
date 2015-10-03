@@ -3,8 +3,11 @@ FROM ubuntu:14.04
 MAINTAINER Jon Auer <jda@coldshore.com>
 
 VOLUME ["/var/moodledata"]
-EXPOSE 80
+EXPOSE 80 443
 COPY moodle-config.php /var/www/html/config.php
+
+# Enable SSL, moodle requires it
+RUN a2enmod ssl && a2ensite default-ssl # if using proxy, don't need actually secure connection
 
 # Keep upstart from complaining
 # RUN dpkg-divert --local --rename --add /sbin/initctl
