@@ -29,7 +29,7 @@ RUN apt-get update && \
 		php5-gd libapache2-mod-php5 postfix wget supervisor php5-pgsql curl libcurl3 \
 		libcurl3-dev php5-curl php5-xmlrpc php5-intl php5-mysql git-core && \
 	cd /tmp && \
-	git clone -b MOODLE_27_STABLE git://git.moodle.org/moodle.git && \
+	git clone -b MOODLE_29_STABLE git://git.moodle.org/moodle.git && \
 	mv /tmp/moodle/* /var/www/html/ && \
 	rm /var/www/html/index.html && \
 	chown -R www-data:www-data /var/www/html && \
