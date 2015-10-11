@@ -24,7 +24,6 @@ ENV MOODLE_URL http://192.168.59.103
 ADD ./foreground.sh /etc/apache2/foreground.sh
 
 RUN apt-get update && \
-	apt-get -y upgrade && \
 	apt-get -y install mysql-client pwgen python-setuptools curl git unzip apache2 php5 \
 		php5-gd libapache2-mod-php5 postfix wget supervisor php5-pgsql curl libcurl3 \
 		libcurl3-dev php5-curl php5-xmlrpc php5-intl php5-mysql git-core && \
