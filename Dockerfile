@@ -38,6 +38,9 @@ RUN apt-get update && \
 # Enable SSL, moodle requires it
 RUN a2enmod ssl && a2ensite default-ssl # if using proxy, don't need actually secure connection
 
+# Cleanup
+RUN apt-get clean autoclean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/lib/dpkg/* /var/lib/cache/* /var/lib/log/*
+
 CMD ["/etc/apache2/foreground.sh"]
 
 #RUN easy_install supervisor
