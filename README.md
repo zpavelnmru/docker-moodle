@@ -2,7 +2,7 @@ docker-moodle
 =============
 [![](https://imagelayers.io/badge/jhardison/moodle:latest.svg)](https://imagelayers.io/?images=jhardison/moodle:latest 'Get your own badge on imagelayers.io')
 
-A Dockerfile that installs and runs the latest Moodle 3 stable, with external MySQL Database.
+A Dockerfile that installs and runs the latest Moodle 3.1 stable, with external MySQL Database.
 
 ## Installation
 
