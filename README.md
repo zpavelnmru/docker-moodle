@@ -1,6 +1,6 @@
 docker-moodle
 =============
-[![](https://imagelayers.io/badge/jhardison/moodle:latest.svg)](https://imagelayers.io/?images=jhardison/moodle:latest 'Get your own badge on imagelayers.io')
+[![](https://images.microbadger.com/badges/image/jhardison/moodle.svg)](https://microbadger.com/images/jhardison/moodle "Get your own image badge on microbadger.com")
 
 A Dockerfile that installs and runs the latest Moodle 3.1 stable, with external MySQL Database.
 
