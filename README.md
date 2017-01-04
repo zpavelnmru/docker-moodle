@@ -2,7 +2,11 @@ docker-moodle
 =============
 [![](https://images.microbadger.com/badges/image/jhardison/moodle.svg)](https://microbadger.com/images/jhardison/moodle "Get your own image badge on microbadger.com")
 
-A Dockerfile that installs and runs the latest Moodle 3.1 stable, with external MySQL Database.
+A Dockerfile that installs and runs the latest Moodle 3.2 stable, with external MySQL Database.
+
+Tags:
+* latest - 3.2 stable
+* v3.1 - 3.1 stable
 
 ## Installation
 
