@@ -4,6 +4,10 @@ docker-moodle
 
 A Dockerfile that installs and runs the latest Moodle 3.2 stable, with external MySQL Database.
 
+Tags:
+* latest - 3.2 stable
+* v3.1 - 3.1 stable
+
 ## Installation
 
 ```
