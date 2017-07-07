@@ -1,8 +1,8 @@
+# Docker-Moodle
 # Dockerfile for moodle instance. more dockerish version of https://github.com/sergiogomez/docker-moodle
 # Forked from Jon Auer's docker version. https://github.com/jda/docker-moodle
 FROM ubuntu:16.04
 MAINTAINER Jonathan Hardison <jmh@jonathanhardison.com>
-#Original Maintainer Jon Auer <jda@coldshore.com>
 
 VOLUME ["/var/moodledata"]
 EXPOSE 80 443
@@ -15,12 +15,9 @@ COPY moodle-config.php /var/www/html/config.php
 # Let the container know that there is no tty
 ENV DEBIAN_FRONTEND noninteractive
 
-# Database info
-#ENV MYSQL_HOST 127.0.0.1
-#ENV MYSQL_USER moodle
-#ENV MYSQL_PASSWORD moodle
-#ENV MYSQL_DB moodle
-ENV MOODLE_URL http://192.168.59.103
+# Database info and other connection information derrived from env variables. See readme.
+# Set ENV Variables externally Moodle_URL should be overridden.
+ENV MOODLE_URL http://127.0.0.1
 
 ADD ./foreground.sh /etc/apache2/foreground.sh
 
@@ -36,17 +33,9 @@ RUN apt-get update && \
 	chmod +x /etc/apache2/foreground.sh
 
 # Enable SSL, moodle requires it
-RUN a2enmod ssl && a2ensite default-ssl # if using proxy, don't need actually secure connection
+RUN a2enmod ssl && a2ensite default-ssl  #if using proxy dont need actually secure connection
 
-# Cleanup
+# Cleanup, this is ran to reduce the resulting size of the image.
 RUN apt-get clean autoclean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/lib/dpkg/* /var/lib/cache/* /var/lib/log/*
 
 CMD ["/etc/apache2/foreground.sh"]
-
-#RUN easy_install supervisor
-#ADD ./start.sh /start.sh
-#
-#ADD ./supervisord.conf /etc/supervisord.conf
-# RUN chmod 755 /start.sh /etc/apache2/foreground.sh
-# EXPOSE 22 80
-# CMD ["/bin/bash", "/start.sh"]
