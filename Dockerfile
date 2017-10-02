@@ -24,7 +24,7 @@ ADD ./foreground.sh /etc/apache2/foreground.sh
 RUN apt-get update && \
 	apt-get -y install mysql-client pwgen python-setuptools curl git unzip apache2 php \
 		php-gd libapache2-mod-php postfix wget supervisor php-pgsql curl libcurl3 \
-		libcurl3-dev php-curl php-xmlrpc php-intl php-mysql git-core php-xml php-mbstring php-zip php-soap cron && \
+		libcurl3-dev php-curl php-xmlrpc php-intl php-mysql git-core php-xml php-mbstring php-zip php-soap cron php7.0-ldap && \
 	cd /tmp && \
 	git clone -b MOODLE_33_STABLE git://git.moodle.org/moodle.git --depth=1 && \
 	mv /tmp/moodle/* /var/www/html/ && \
