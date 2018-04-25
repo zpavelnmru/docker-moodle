@@ -4,6 +4,8 @@ docker-moodle
 
 A Dockerfile that installs and runs the latest Moodle 3.4 stable, with external MySQL Database.
 
+`Note: DB Deployment uses version 5 of MySQL. MySQL:Latest is now v8.`
+
 Tags:
 * latest - 3.4 stable
 * v3.4 - 3.4 stable
@@ -28,7 +30,7 @@ When running locally or for a test deployment, use of localhost is acceptable.
 To spawn a new instance of Moodle:
 
 ```
-docker run -d --name DB -p 3306:3306 -e MYSQL_DATABASE=moodle -e MYSQL_ROOT_PASSWORD=moodle -e MYSQL_USER=moodle -e MYSQL_PASSWORD=moodle mysql
+docker run -d --name DB -p 3306:3306 -e MYSQL_DATABASE=moodle -e MYSQL_ROOT_PASSWORD=moodle -e MYSQL_USER=moodle -e MYSQL_PASSWORD=moodle mysql:5
 docker run -d -P --name moodle --link DB:DB -e MOODLE_URL=http://localhost:8080 -p 8080:80 jhardison/moodle
 ```
 
@@ -45,7 +47,7 @@ In the following steps, replace MOODLE_URL with your appropriate FQDN.
 
 * Deploy With Docker
 ```
-docker run -d --name DB -p 3306:3306 -e MYSQL_DATABASE=moodle -e MYSQL_ROOT_PASSWORD=moodle -e MYSQL_USER=moodle -e MYSQL_PASSWORD=moodle mysql
+docker run -d --name DB -p 3306:3306 -e MYSQL_DATABASE=moodle -e MYSQL_ROOT_PASSWORD=moodle -e MYSQL_USER=moodle -e MYSQL_PASSWORD=moodle mysql:5
 docker run -d -P --name moodle --link DB:DB -e MOODLE_URL=http://moodle.company.com -p 80:80 jhardison/moodle
 ```
 
