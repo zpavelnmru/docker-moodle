@@ -7,7 +7,8 @@ A Dockerfile that installs and runs the latest Moodle 3.4 stable, with external 
 `Note: DB Deployment uses version 5 of MySQL. MySQL:Latest is now v8.`
 
 Tags:
-* latest - 3.4 stable
+* latest - 3.5 stable
+* v3.5 - 3.5 stable
 * v3.4 - 3.4 stable
 * v3.3 - 3.3 stable
 * v3.2 - 3.2 stable
