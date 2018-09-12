@@ -6,7 +6,7 @@ LABEL maintainer="Jonathan Hardison <jmh@jonathanhardison.com>"
 
 VOLUME ["/var/moodledata"]
 EXPOSE 80 443
-COPY moodle-config.php /var/www/html/config.php
+ADD moodle-config.php /var/www/html/config.php
 
 # Let the container know that there is no tty
 ENV DEBIAN_FRONTEND noninteractive
@@ -29,7 +29,7 @@ RUN apt-get update && \
 	chmod +x /etc/apache2/foreground.sh
 
 #cron
-COPY moodlecron /etc/cron.d/moodlecron
+ADD moodlecron /etc/cron.d/moodlecron
 RUN chmod 0644 /etc/cron.d/moodlecron
 
 # Enable SSL, moodle requires it
