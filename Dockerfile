@@ -1,16 +1,12 @@
 # Docker-Moodle
 # Dockerfile for moodle instance. more dockerish version of https://github.com/sergiogomez/docker-moodle
-# Forked from Jon Auer's docker version. https://github.com/jda/docker-moodle
+# Forked from Jade Auer's docker version. https://github.com/jda/docker-moodle
 FROM ubuntu:18.04
-MAINTAINER Jonathan Hardison <jmh@jonathanhardison.com>
+LABEL maintainer="Jonathan Hardison <jmh@jonathanhardison.com>"
 
 VOLUME ["/var/moodledata"]
 EXPOSE 80 443
-COPY moodle-config.php /var/www/html/config.php
-
-# Keep upstart from complaining
-# RUN dpkg-divert --local --rename --add /sbin/initctl
-# RUN ln -sf /bin/true /sbin/initctl
+ADD moodle-config.php /var/www/html/config.php
 
 # Let the container know that there is no tty
 ENV DEBIAN_FRONTEND noninteractive
@@ -33,7 +29,7 @@ RUN apt-get update && \
 	chmod +x /etc/apache2/foreground.sh
 
 #cron
-COPY moodlecron /etc/cron.d/moodlecron
+ADD moodlecron /etc/cron.d/moodlecron
 RUN chmod 0644 /etc/cron.d/moodlecron
 
 # Enable SSL, moodle requires it
@@ -42,4 +38,4 @@ RUN a2enmod ssl && a2ensite default-ssl  #if using proxy dont need actually secu
 # Cleanup, this is ran to reduce the resulting size of the image.
 RUN apt-get clean autoclean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/lib/dpkg/* /var/lib/cache/* /var/lib/log/*
 
-CMD ["/etc/apache2/foreground.sh"]
+ENTRYPOINT ["/etc/apache2/foreground.sh"]
