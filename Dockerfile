@@ -38,4 +38,4 @@ RUN a2enmod ssl && a2ensite default-ssl  #if using proxy dont need actually secu
 # Cleanup, this is ran to reduce the resulting size of the image.
 RUN apt-get clean autoclean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/lib/dpkg/* /var/lib/cache/* /var/lib/log/*
 
-CMD ["/etc/apache2/foreground.sh"]
+ENTRYPOINT ["/etc/apache2/foreground.sh"]
