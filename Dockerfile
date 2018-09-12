@@ -1,16 +1,12 @@
 # Docker-Moodle
 # Dockerfile for moodle instance. more dockerish version of https://github.com/sergiogomez/docker-moodle
-# Forked from Jon Auer's docker version. https://github.com/jda/docker-moodle
+# Forked from Jade Auer's docker version. https://github.com/jda/docker-moodle
 FROM ubuntu:18.04
-MAINTAINER Jonathan Hardison <jmh@jonathanhardison.com>
+LABEL maintainer="Jonathan Hardison <jmh@jonathanhardison.com>"
 
 VOLUME ["/var/moodledata"]
 EXPOSE 80 443
 COPY moodle-config.php /var/www/html/config.php
-
-# Keep upstart from complaining
-# RUN dpkg-divert --local --rename --add /sbin/initctl
-# RUN ln -sf /bin/true /sbin/initctl
 
 # Let the container know that there is no tty
 ENV DEBIAN_FRONTEND noninteractive
