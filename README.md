@@ -2,7 +2,7 @@ docker-moodle
 =============
 [![](https://images.microbadger.com/badges/image/jhardison/moodle.svg)](https://microbadger.com/images/jhardison/moodle "Get your own image badge on microbadger.com")
 
-A Dockerfile that installs and runs the latest Moodle 3.4 stable, with external MySQL Database.
+A Dockerfile that installs and runs the latest Moodle 3.5 stable, with external MySQL Database.
 
 `Note: DB Deployment uses version 5 of MySQL. MySQL:Latest is now v8.`
 
