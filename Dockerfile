@@ -15,6 +15,10 @@ ENV DEBIAN_FRONTEND noninteractive
 # Set ENV Variables externally Moodle_URL should be overridden.
 ENV MOODLE_URL http://127.0.0.1
 
+# Enable when using external SSL reverse proxy
+# Default: false
+ENV SSL_PROXY false
+
 ADD ./foreground.sh /etc/apache2/foreground.sh
 
 RUN apt-get update && \
