@@ -1,10 +1,4 @@
----
-name: Bug report
-about: Create a report to help us improve
-
----
-
-**Describe the bug**
+**Describe the issue**
 A clear and concise description of what the bug is.
 
 **To Reproduce**
@@ -20,6 +14,7 @@ If applicable, add screenshots to help explain your problem.
  - OS: [e.g. Ubuntu or Windows]
  - OS Version [e.g. 22]
  - Docker Version [e.g. 18.06.1-ce]
+ - Tag name of image if pulled from Docker Hub. [e.g. v3.1]
 
 **Additional context**
 Add any other context about the problem here.
