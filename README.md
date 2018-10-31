@@ -46,6 +46,8 @@ http://localhost:8080
 For a production deployment of moodle, use of a FQDN is advised. This FQDN should be created in DNS for resolution to your host. For example, if your internal DNS is company.com, you could leverage moodle.company.com and have that record resolve to the host running your moodle container. The moodle url would then be, `MOODLE_URL=http://moodle.company.com`
 In the following steps, replace MOODLE_URL with your appropriate FQDN.
 
+In some cases when you are using an external SSL reverse proxy, you should enable `SSL_PROXY=true` variable.
+
 * Deploy With Docker
 ```
 docker run -d --name DB -p 3306:3306 -e MYSQL_DATABASE=moodle -e MYSQL_ROOT_PASSWORD=moodle -e MYSQL_USER=moodle -e MYSQL_PASSWORD=moodle mysql:5
