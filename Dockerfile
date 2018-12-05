@@ -26,7 +26,7 @@ RUN apt-get update && \
 		php-gd libapache2-mod-php postfix wget supervisor php-pgsql curl libcurl4 \
 		libcurl3-dev php-curl php-xmlrpc php-intl php-mysql git-core php-xml php-mbstring php-zip php-soap cron php-ldap && \
 	cd /tmp && \
-	git clone -b MOODLE_35_STABLE git://git.moodle.org/moodle.git --depth=1 && \
+	git clone -b MOODLE_36_STABLE git://git.moodle.org/moodle.git --depth=1 && \
 	mv /tmp/moodle/* /var/www/html/ && \
 	rm /var/www/html/index.html && \
 	chown -R www-data:www-data /var/www/html && \
