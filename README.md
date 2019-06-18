@@ -2,12 +2,13 @@ docker-moodle
 =============
 [![Build Status](https://dev.azure.com/jmhardison/Docker%20Moodle/_apis/build/status/jmhardison.docker-moodle?branchName=master)](https://dev.azure.com/jmhardison/Docker%20Moodle/_build/latest?definitionId=1) [![](https://images.microbadger.com/badges/image/jhardison/moodle.svg)](https://microbadger.com/images/jhardison/moodle "Get your own image badge on microbadger.com")
 
-A Dockerfile that installs and runs the latest Moodle 3.6 stable, with external MySQL Database.
+A Dockerfile that installs and runs the latest Moodle 3.7 stable, with external MySQL Database.
 
 `Note: DB Deployment uses version 5 of MySQL. MySQL:Latest is now v8.`
 
 Tags:
-* latest - 3.6 stable
+* latest - 3.7 stable
+* v3.7 - 3.7 stable
 * v3.6 - 3.6 stable
 * v3.5 - 3.5 stable
 * v3.4 - 3.4 stable
