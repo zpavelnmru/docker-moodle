@@ -4,7 +4,7 @@
 FROM ubuntu:18.04
 LABEL maintainer="Jonathan Hardison <jmh@jonathanhardison.com>"
 
-VOLUME ["/var/moodledata"]
+VOLUME ["/var/moodledata","/var/www/html/mod"]
 EXPOSE 80 443
 ADD moodle-config.php /var/www/html/config.php
 
@@ -41,5 +41,7 @@ RUN a2enmod ssl && a2ensite default-ssl  #if using proxy dont need actually secu
 
 # Cleanup, this is ran to reduce the resulting size of the image.
 RUN apt-get clean autoclean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/lib/dpkg/* /var/lib/cache/* /var/lib/log/*
+
+COPY ./php.ini /etc/php/7.2/apache2/php.ini
 
 ENTRYPOINT ["/etc/apache2/foreground.sh"]
