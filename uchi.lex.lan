@@ -1,0 +1,35 @@
+map $sent_http_content_type $expires {
+    default off;
+    text/html epoch;
+    text/css max;
+    application/javascript max;
+    ~image/ max;
+}
+
+server {
+    listen 80;
+
+    server_name uchi.lex.lan uchi.lexema.ru;
+    expires $expires;
+
+    client_max_body_size 500M;
+    access_log /var/log/nginx/uchi.lex.lan;
+    proxy_redirect off;
+#    proxy_redirect / /;
+    proxy_http_version 1.1;
+#    proxy_set_header Host $host;
+    proxy_set_header Host http://uchi.lex.lan;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-NginX-Proxy true;
+
+    location / {
+        proxy_pass http://localhost:8081;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+   }
+
+
+}
+

@@ -15,7 +15,8 @@ services:
             restart_policy:
                 condition: any
     moodleapp:
-        image: moodle:lexema
+#        image: jhardison/moodle:latest
+        image: dhub.lex.lan:5000/app/moodle:lexema
         links:
             - dbapp:DB
         depends_on: 
@@ -31,7 +32,8 @@ services:
             - moodle_variables.env
         networks:
             - backendDB
-            - frontendWEB
+#            - frontendWEB
+            - proxy
         deploy:
             replicas: 1
             restart_policy:
@@ -41,6 +43,8 @@ services:
 #    db-volume:
 #    moodleapp-data:
 networks:
+  proxy:
+    external: true
   default:
     ipam:
       config:
